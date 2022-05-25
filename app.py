@@ -1,0 +1,55 @@
+# Starter pack
+from flask import Flask, send_from_directory, render_template
+from flask_restful import Api, Resource, reqparse
+from flask_cors import CORS #comment this on deployment
+import numpy as np
+import pickle
+import joblib
+from flask import jsonify
+from flask import request
+
+app = Flask(__name__, static_url_path='', static_folder='frontend/build')
+CORS(app) #comment this on deployment
+api = Api(app)
+
+"""
+Jika tidak ada definisi methods, berarti methods=['GET']
+
+message untuk route ini hanya iseng semata.
+
+Agar bisa diterima oleh axios, dikirim dengan jsonify()
+"""
+@app.route("/get")
+def users_api():
+    message = "I hope you safe"
+    return jsonify(message = message)
+
+model = joblib.load(open('./model/random_forest.joblib', 'rb'))
+
+"""
+Ini saat form yang telah diisi di POST melalui axios
+data dikirim ke route prediction
+data form dari axios diambil dengan request.json
+yahh sisanya sama seperti projek sebelumnya.
+"""
+@app.route("/prediction", methods=['POST'])
+def jet():
+    try:
+        dicto = dict(request.json)
+        print(dicto.items())
+        float_features = [float(value) for key,value in dicto.items()]
+    except:
+        return jsonify(
+            message="Please, just input number!",
+        )
+
+    final_features = [np.array(float_features)]
+    prediction = model.predict(final_features)
+    death_event = ['Will Alive', 'Please, check to Doctor, NOW!']
+
+    return jsonify(
+        message=death_event[int(prediction[0])],
+    )
+
+#* nama def di bawah route itu bisa diubah sesuka kita
+#* nama url route bisa diubah asalkan entar disesuaikan lagi dengan axios.

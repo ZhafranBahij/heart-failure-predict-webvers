@@ -55,7 +55,7 @@ export default function Predict() {
   useEffect(() => {
     axios
       // .get("http://localhost:5000/get")
-      .get("https://heart-failure-prediction-g2.herokuapp.com/get")
+      .get("https://heart-failure-prediction-g2.herokuapp.com/flask/get")
       .then((response) => {
         console.log("SUCCESS", response);
         setGetMessage(response.data.message);
@@ -77,7 +77,7 @@ export default function Predict() {
     axios({
       method: "post",
       // url: "http://localhost:5000/prediction",
-      url: "https://heart-failure-prediction-g2.herokuapp.com/prediction",
+      url: "https://heart-failure-prediction-g2.herokuapp.com/flask/prediction",
       data: data,
     })
       .then((response) => {

@@ -15,7 +15,7 @@ api = Api(app)
 Jika tidak ada definisi methods, berarti methods=['GET']
 Agar bisa diterima oleh axios, dikirim dengan jsonify()
 """
-@app.route("/get")
+@app.route("/flask/get")
 def users_api():
     message = "I hope you safe"
     return jsonify(message = message)
@@ -28,7 +28,7 @@ data dikirim ke route prediction
 data form dari axios diambil dengan request.json
 yahh sisanya sama seperti projek sebelumnya.
 """
-@app.route("/prediction", methods=['POST'])
+@app.route("/flask/prediction", methods=['POST'])
 def jet():
     try:
         dicto = dict(request.json)

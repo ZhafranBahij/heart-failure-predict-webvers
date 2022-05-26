@@ -7,11 +7,28 @@ import joblib
 from flask import jsonify
 from flask import request
 
+"""
+app = Flask(__name__, static_url_path='', static_folder='frontend/dist')
+
+Hal itu digunakan untuk menemukan lokasi web yang htmlnya akan dipakai nantinya.
+Untuk build itu digunakan saat memakai react
+Untuk dist itu digunakan saat memakai vite-react. 
+
+Karena ini memakai vite react + flask, jadinya pakai dist
+"""
 # app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 app = Flask(__name__, static_url_path='', static_folder='frontend/dist')
 # CORS(app) #comment this on deployment
 api = Api(app)
 
+
+"""
+send_from_directory digunakan saat deploy dengan tujuan 
+web yang dideploy itu berhasil menampilkan tampilan web
+yang seharusnya
+
+JANGAN LUPA saat push ke heroku, dist-nya jangan di ignore
+"""
 @app.route("/", defaults={'path':''})
 def serve(path):
     return send_from_directory(app.static_folder,'index.html')

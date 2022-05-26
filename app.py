@@ -1,7 +1,7 @@
 # Starter pack
 from flask import Flask, send_from_directory, render_template
 from flask_restful import Api, Resource, reqparse
-from flask_cors import CORS #comment this on deployment
+# from flask_cors import CORS #comment this on deployment
 import numpy as np
 import joblib
 from flask import jsonify
@@ -9,15 +9,15 @@ from flask import request
 
 # app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 app = Flask(__name__, static_url_path='', static_folder='frontend/dist')
-CORS(app) #comment this on deployment
+# CORS(app) #comment this on deployment
 api = Api(app)
-
-if __name__ == '__main__':
-    app.run()
 
 @app.route("/")
 def index():
-    return app.send_static_file('index.html')
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run()
 
 """
 Jika tidak ada definisi methods, berarti methods=['GET']
@@ -57,7 +57,7 @@ def jet():
 
 @app.errorhandler(404)
 def not_found(e):
-    return app.send_static_file('index.html')
+    return render_template('index.html')
 
 #* nama def di bawah route itu bisa diubah sesuka kita
 #* nama url route bisa diubah asalkan entar disesuaikan lagi dengan axios.

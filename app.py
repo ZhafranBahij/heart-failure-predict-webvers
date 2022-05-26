@@ -12,9 +12,10 @@ app = Flask(__name__, static_url_path='', static_folder='frontend/dist')
 # CORS(app) #comment this on deployment
 api = Api(app)
 
-@app.route("/")
-def index():
-    return render_template('index.html')
+@app.route("/", defaults={'path':''})
+def serve(path):
+    return send_from_directory(app.static_folder,'index.html')
+
 
 if __name__ == '__main__':
     app.run()
@@ -56,8 +57,8 @@ def jet():
     )
 
 @app.errorhandler(404)
-def not_found(e):
-    return render_template('index.html')
+def not_found():
+    return send_from_directory(app.static_folder,'index.html')
 
 #* nama def di bawah route itu bisa diubah sesuka kita
 #* nama url route bisa diubah asalkan entar disesuaikan lagi dengan axios.

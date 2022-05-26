@@ -14,7 +14,7 @@ api = Api(app)
 
 @app.route("/")
 def index():
-    return send_from_directory(app.static_folder,'index.html')
+    return app.send_static_file('index.html')
 
 """
 Jika tidak ada definisi methods, berarti methods=['GET']
@@ -51,6 +51,10 @@ def jet():
     return jsonify(
         message=death_event[int(prediction[0])],
     )
+
+@app.errorhandler(404)
+def not_found(e):
+    return app.send_static_file('index.html')
 
 #* nama def di bawah route itu bisa diubah sesuka kita
 #* nama url route bisa diubah asalkan entar disesuaikan lagi dengan axios.

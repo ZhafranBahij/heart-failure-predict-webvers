@@ -7,7 +7,8 @@ import joblib
 from flask import jsonify
 from flask import request
 
-app = Flask(__name__, static_url_path='', static_folder='frontend/build')
+# app = Flask(__name__, static_url_path='', static_folder='frontend/build')
+app = Flask(__name__, static_url_path='', static_folder='frontend/dist')
 # CORS(app) #comment this on deployment
 api = Api(app)
 

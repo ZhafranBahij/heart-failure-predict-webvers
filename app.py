@@ -1,7 +1,7 @@
 # Starter pack
 from flask import Flask, send_from_directory, render_template
 from flask_restful import Api, Resource, reqparse
-# from flask_cors import CORS #comment this on deployment
+from flask_cors import CORS #comment this on deployment
 import numpy as np
 import joblib
 from flask import jsonify
@@ -9,8 +9,11 @@ from flask import request
 
 # app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 app = Flask(__name__, static_url_path='', static_folder='frontend/dist')
-# CORS(app) #comment this on deployment
+CORS(app) #comment this on deployment
 api = Api(app)
+
+if __name__ == '__main__':
+    app.run()
 
 @app.route("/")
 def index():

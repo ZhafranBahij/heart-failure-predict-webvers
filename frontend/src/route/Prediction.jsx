@@ -54,7 +54,7 @@ export default function Predict() {
   // Ini berguna untuk mendapatkan data json dari app.py yang routenya get dan method get
   useEffect(() => {
     axios
-      // .get("http://localhost:5000/get")
+      // .get("http://localhost:5000/flask/get")
       .get("https://heart-failure-prediction-g2.herokuapp.com/flask/get")
       .then((response) => {
         console.log("SUCCESS", response);
@@ -76,7 +76,7 @@ export default function Predict() {
     event.preventDefault();
     axios({
       method: "post",
-      // url: "http://localhost:5000/prediction",
+      // url: "http://localhost:5000/flask/prediction",
       url: "https://heart-failure-prediction-g2.herokuapp.com/flask/prediction",
       data: data,
     })

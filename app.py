@@ -3,7 +3,6 @@ from flask import Flask, send_from_directory, render_template
 from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS #comment this on deployment
 import numpy as np
-import pickle
 import joblib
 from flask import jsonify
 from flask import request
@@ -14,9 +13,6 @@ api = Api(app)
 
 """
 Jika tidak ada definisi methods, berarti methods=['GET']
-
-message untuk route ini hanya iseng semata.
-
 Agar bisa diterima oleh axios, dikirim dengan jsonify()
 """
 @app.route("/get")
